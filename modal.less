@@ -1,0 +1,32 @@
+/**
+ * Author:      Matt Hinchliffe <www.maketea.co.uk>
+ * Modified:    24/02/2012
+ * Description: Simple modal window
+ * Example:
+ * <div id="modal-wrapper">
+ *     <div id="modal-content" />
+ *     <span id="modal-close" />
+ * </div>
+ * <div id="modal-overlay" />
+ */
+@modalZindex: 300;
+
+.modal-overlay {
+	background:rgba(0, 0, 0, 0.25);
+	z-index:@modalZindex;
+}
+
+.modal-wrapper {
+	background:#fff;
+	z-index:@modalZindex + 10;
+	.box-shadow(3px, 3px, 0, rgba(0, 0, 0, 0.25));
+}
+	.modal-content {
+		height:100%;
+	}
+	.modal-close {
+		position:absolute;
+		top:10px;
+		right:10px;
+		cursor:pointer;
+	}
