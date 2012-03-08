@@ -2,7 +2,7 @@
  * @name        Simple modal
  * @author      Matt Hinchliffe
  * @modified    08/03/2012
- * @version     0.6.5
+ * @version     0.6.6
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
  * @example
@@ -127,7 +127,7 @@
 		/**
 		 * Open
 		 *
-		 * @description Open the modal window
+		 * @description Populate and open the modal window
 		 * @param {object} content
 		 * @param {function} callback
 		 */
@@ -171,9 +171,14 @@
 			this.align();
 			this.isOpen = true;
 
+			// Callbacks
 			if (this.opts.onopen)
 			{
 				this.opts.onopen.call(this);
+			}
+			if (callback)
+			{
+				callback.call(this);
 			}
 		},
 
@@ -181,9 +186,10 @@
 		 * Update
 		 *
 		 * @description Change the modal window contents
-		 * @param content
+		 * @param {object} content
+		 * @param {function} callback
 		 */
-		update: function(content)
+		update: function(content, callback)
 		{
 			this.content.html(content);
 
@@ -191,9 +197,14 @@
 			{
 				this.align();
 
+				// Callbacks
 				if (this.opts.onupdate)
 				{
 					this.opts.onupdate.call(this);
+				}
+				if (callback)
+				{
+					callback.call(this);
 				}
 			}
 		},
@@ -202,8 +213,9 @@
 		 * Close
 		 *
 		 * @description Close the modal window and clear contents
+		 * @param {function} callback
 		 */
-		close: function()
+		close: function(callback)
 		{
 			if ( ! this.isInitialized || ! this.isOpen)
 			{
@@ -226,9 +238,14 @@
 
 			this.isOpen = false;
 
+			// Callbacks
 			if (this.opts.onclose)
 			{
 				this.opts.onclose.call(this);
+			}
+			if (callback)
+			{
+				callback.call(this);
 			}
 		}
 	};

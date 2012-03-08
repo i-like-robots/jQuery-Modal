@@ -21,7 +21,7 @@ https://github.com/i-like-robots/jQuery-Modal/issues
 
 ## Versioning
 
-The current version is `0.6.4`. Releases will be numbered in following format:
+The current version is `0.6.6`. Releases will be numbered in following format:
 
 `<major>.<minor>.<patch>`
 
