@@ -1,8 +1,8 @@
 /**
  * @name        Simple modal
  * @author      Matt Hinchliffe
- * @modified    07/03/2012
- * @version     0.6.4
+ * @modified    08/03/2012
+ * @version     0.6.5
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
  * @example
@@ -89,7 +89,7 @@
 			// Only fix the modal if attached to the body
 			if (this.opts.fixed)
 			{
-				this.opts.fixed = $.isWindow(this.context)
+				this.opts.fixed = $.isWindow(this.context[0]);
 			}
 
 			this.isInitialized = true;
@@ -173,7 +173,7 @@
 
 			if (this.opts.onopen)
 			{
-				this.opts['onopen']();
+				this.opts.onopen.call(this);
 			}
 		},
 
@@ -193,7 +193,7 @@
 
 				if (this.opts.onupdate)
 				{
-					this.opts['onupdate']();
+					this.opts.onupdate.call(this);
 				}
 			}
 		},
@@ -212,11 +212,8 @@
 
 			var self = this;
 
-			// Unbind resize event
-			if (this.opts.fixed)
-			{
-				this.context.unbind('.modal');
-			}
+			// Unbind events
+			this.context.unbind('.modal');
 
 			// Fade out
 			this.wrapper
@@ -231,7 +228,7 @@
 
 			if (this.opts.onclose)
 			{
-				this.opts['onclose']();
+				this.opts.onclose.call(this);
 			}
 		}
 	};
