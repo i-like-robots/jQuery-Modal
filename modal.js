@@ -24,6 +24,7 @@
  * <div class="modal-overlay" data-toggle="modal" />
  */
 
+/*jshint trailing:true, smarttabs:true */
 ; (function($, undefined)
 {
 	"use strict";
@@ -34,10 +35,11 @@
 			onopen:  undefined,
 			onclose: undefined,
 			onupdate: undefined,
-			width:   640,
-			height:  480,
-			fixed:   true,
-			overlay: true
+			width: 640,
+			height: 480,
+			fixed: true,
+			overlay: true,
+			blur: true
 		}, options);
 		this.target = target;
 
@@ -74,7 +76,7 @@
 			// Create overlay
 			if (this.opts.overlay)
 			{
-				this.overlay = $('<div class="modal-overlay" data-toggle="modal" />')
+				this.overlay = $('<div class="modal-overlay"' + (this.opts.blur ? 'data-toggle="modal"' : '') + ' />')
 					.css({
 						position: 'absolute',
 						top: 0,
@@ -127,7 +129,7 @@
 		/**
 		 * Open
 		 *
-		 * @description Populate and open the modal window
+		 * @description Open the modal window
 		 * @param {object} content
 		 * @param {function} callback
 		 */
