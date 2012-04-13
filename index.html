@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+
+	<title>jQuery Modal</title>
+
+
+	<link rel="stylesheet" href="css/example.css" />
+	<link rel="stylesheet" href="css/modal.css" />
+
+	<!--
+	jQuery Modal by Matt Hinchliffe <http://www.maketea.co.uk>
+	Find out more at GitHub <http://github.com/i-like-robots/jQuery-Modal>
+	-->
+
+</head>
+<body>
+
+	<div id="introduction">
+		<h1>jQuery Modal</h1>
+		<p class="intro">
+			Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
+			window</a>. The plugin is highly optimised and customisable.
+		</p>
+		<p>
+			<button class="js-open" rel="example">Open the modal</button>
+		</p>
+	</div>
+
+	<p id="example">
+		Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
+		capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
+		ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
+		prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
+	</p>
+
+	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+	<script src="js/modal.js"></script>
+	<script>
+		$(function()
+		{
+			// Create a modal instance
+			window.modal = $('body').modal().data('modal');
+
+			// Bind click event
+			$(document).on('click', '.js-open', function()
+			{
+				modal.open( document.getElementById( this.getAttribute('rel') ).innerHTML );
+			});
+		});
+	</script>
+
+</body>
+</html>

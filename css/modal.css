@@ -1,7 +1,7 @@
 /**
  * Author:      Matt Hinchliffe <www.maketea.co.uk>
- * Modified:    08/03/2012
- * Description: Simple modal window
+ * Modified:    10/04/2012
+ * Description: Simple jQuery modal window
  * Example:
  * <div id="modal-wrapper">
  *     <div id="modal-content" />
@@ -9,25 +9,29 @@
  * </div>
  * <div id="modal-overlay" />
  */
-@modalZindex: 300;
 
 .modal-overlay {
+	z-index:300;
 	background:rgba(0, 0, 0, 0.25);
-	z-index:@modalZindex;
 }
 
 .modal-wrapper {
+	z-index:310;
 	background:#fff;
-	z-index:@modalZindex + 10;
-	.box-shadow(3px, 3px, 0, rgba(0, 0, 0, 0.25));
+	border-radius:15px;
+	-webkit-box-shadow:0 0 15px rgba(0, 0, 0, 0.25);
+	   -moz-box-shadow:0 0 15px rgba(0, 0, 0, 0.25);
+	        box-shadow:0 0 15px rgba(0, 0, 0, 0.25);
 }
 	.modal-content {
 		height:100%;
+		padding:2.5em 1em 1em;
 	}
 	.modal-close {
 		position:absolute;
-		top:10px;
-		right:10px;
+		top:.5em;
+		right:1em;
+		z-index:320;
+		font-size:.75em;
 		cursor:pointer;
-		z-index:@modalZindex + 20;
 	}

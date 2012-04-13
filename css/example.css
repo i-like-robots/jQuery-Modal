@@ -1,0 +1,45 @@
+/**
+ * Author:      Matt Hinchliffe <www.maketea.co.uk>
+ * Modified:    13/04/2012
+ * Description: Some crummy styles to lay out the example file
+ */
+
+body {
+	line-height:1.5;
+	font-family:Arial, sans-serif;
+	color:#111;
+	background:#eee;
+}
+
+h1 {
+	font-size:2em;
+	margin:0 0 .5em;
+}
+
+p {
+	margin:0 0 1.5em;
+}
+
+button {
+	font-size:1.5em;
+	line-height:1;
+	padding:.25em .5em;
+	border:none;
+	color:#fff;
+	background:#333;
+	border-radius:7px;
+	cursor:pointer;
+}
+	button:hover {
+		background-color:#111;
+	}
+
+#introduction {
+	width:25em;
+	margin:5em auto;
+	text-align:center;
+}
+
+#example {
+	display:none;
+}
