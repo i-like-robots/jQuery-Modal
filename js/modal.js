@@ -1,8 +1,8 @@
 /**
  * @name        Simple modal
  * @author      Matt Hinchliffe
- * @modified    08/03/2012
- * @version     0.6.6
+ * @modified    13/04/2012
+ * @version     0.6.7
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
  * @example
@@ -86,7 +86,7 @@
 			}
 
 			// Bind events and get dimensions from the window if attached to the body
-			this.context = this.target.nodeName.toLowerCase() === 'body' ? $(window) : $( this.target ).css('position', 'relative');
+			this.context = this.target === document.body ? $(window) : $( this.target ).css('position', 'relative');
 
 			// Only fix the modal if attached to the body
 			if (this.opts.fixed)
