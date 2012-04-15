@@ -1,22 +1,23 @@
 /**
  * @name        Simple modal
  * @author      Matt Hinchliffe
- * @modified    13/04/2012
- * @version     0.6.7
+ * @modified    15/04/2012
+ * @version     0.7.0
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
- * @example
- * var $modal = $('body').modal().data('modal');
+ *
+ * jQuery plugin setup:
+ * var modal_instance = $('body').modal().data('modal');
  *
  * $.ajax({
  *     url: [url],
  *     success: function(data)
  *     {
- *         $modal.open(data, callback);
+ *         modal_instance.open(data, callback);
  *     }
  * });
  *
- * @example
+ * Generated markup:
  * <div class="modal-wrapper">
  *     <div class="modal-content" />
  *     <span class="modal-close" data-toggle="modal">Close</span>
@@ -37,7 +38,7 @@
 			onupdate: undefined,
 			width: 640,
 			height: 480,
-			fixed: true,
+			fixed: false,
 			overlay: true,
 			blur: true
 		}, options);
@@ -64,9 +65,11 @@
 				return;
 			}
 
+			this.doc = $(document);
+
 			// Build modal
 			this.wrapper = $('<div class="modal-wrapper"><span class="modal-close" data-toggle="modal">Close</span></div>').css({
-				position: 'absolute',
+				position: this.opts.fixed ? 'fixed' : 'absolute',
 				width: this.opts.width,
 				height: this.opts.height
 			});
@@ -80,19 +83,15 @@
 					.css({
 						position: 'absolute',
 						top: 0,
-						left: 0
+						left: 0,
+						width: '100%'
 					})
 					.appendTo( this.target );
 			}
 
-			// Bind events and get dimensions from the window if attached to the body
-			this.context = this.target === document.body ? $(window) : $( this.target ).css('position', 'relative');
-
-			// Only fix the modal if attached to the body
-			if (this.opts.fixed)
-			{
-				this.opts.fixed = $.isWindow(this.context[0]);
-			}
+			// Context appropriate metrics and events
+			this.isBody = (this.target === document.body);
+			this.context = this.isBody ? $(window) : $( this.target ).css('position', 'relative');
 
 			this.isInitialized = true;
 		},
@@ -112,17 +111,13 @@
 
 			this.wrapper.css(
 			{
-				top: height < maxHeight ? ( (maxHeight - height ) / 2) + top : top,
-				left: width < maxWidth ? ( maxWidth - width ) / 2 : 0
+				top: height < maxHeight ? ( (maxHeight - height ) / 2 ) + top : top,
+				left: width < maxWidth ? (maxWidth - width) / 2 : 0
 			});
 
 			if (this.opts.overlay)
 			{
-				this.overlay.css({
-					top: top,
-					width: maxWidth,
-					height: maxHeight
-				});
+				this.overlay.css('height', this.isBody ? this.doc.height() : maxHeight );
 			}
 		},
 
@@ -146,9 +141,9 @@
 
 			var self = this;
 
-			if (this.opts.fixed)
+			if (this.isBody)
 			{
-				this.context.on('resize.modal scroll.modal', function()
+				this.context.on('resize.modal', function()
 				{
 					self.align();
 				});
@@ -227,7 +222,7 @@
 			var self = this;
 
 			// Unbind events
-			this.context.unbind('.modal');
+			this.context.off('.modal');
 
 			// Fade out
 			this.wrapper

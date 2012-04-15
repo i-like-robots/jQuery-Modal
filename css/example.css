@@ -4,12 +4,17 @@
  * Description: Some crummy styles to lay out the example file
  */
 
-body {
-	line-height:1.5;
-	font-family:Arial, sans-serif;
-	color:#111;
-	background:#eee;
+html, body {
+	height:100%;
+	margin:0;
+	padding:0;
 }
+	body {
+		line-height:1.5;
+		font-family:Arial, sans-serif;
+		color:#111;
+		background:#eee;
+	}
 
 h1 {
 	font-size:2em;
@@ -36,7 +41,8 @@ button {
 
 #introduction {
 	width:25em;
-	margin:5em auto;
+	margin:0 auto;
+	padding:5em 0 2em;
 	text-align:center;
 }
 
