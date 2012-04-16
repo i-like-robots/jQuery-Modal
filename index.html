@@ -43,7 +43,7 @@ var m = $('body').modal(opts).data('modal');
 $.ajax({
     success: function(data)
     {
-        m.open(data, callback);
+        m.open(data);
     }
 });</code></pre>
 		</section>
@@ -113,8 +113,8 @@ $.ajax({
 				</dd>
 				<dt>.close([callback])</dt>
 				<dd>
-					Closes the modal window. <var>Callback</var> A function to call once the window has
-					closed.
+					Closes the modal window and removes the content. <var>Callback</var> A function to call once the
+					window has closed.
 				</dd>
 				<dt>.update(content[, callback])</dt>
 				<dd>
@@ -125,13 +125,13 @@ $.ajax({
 				</dd>
 				<dt>.align()</dt>
 				<dd>
-					Repositions the window to the current viewport.
+					Repositions the window to the center of the modal window parent.
 				</dd>
-				<dt>Callbacks:</dt>
+				<dt>A note on callbacks:</dt>
 				<dd>
 					All callbacks will be called from the scope of the modal instance, so that <code>this</code> will
 					refer to the modal instance. Callbacks provided as arguments to the public methods will be executed
-					in addition to those specified in the options.
+					in addition to those specified as options.
 				</dd>
 			</dl>
 		</section>
@@ -145,6 +145,10 @@ $.ajax({
 		prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
 	</p>
 
+	<a href="https://github.com/i-like-robots/jQuery-Modal">
+		<img style="position:absolute;top:0;right:0;border:0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" />
+	</a>
+
 	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
 	<script src="js/modal.js"></script>
 	<script>
@@ -153,7 +157,7 @@ $.ajax({
 			// Create a modal instance. Use the document body as target to create a modal window for the entire document.
 			window.m = $('body').modal().data('modal');
 
-			// Bind click event
+			// Bind a click event to copy a hidden elements content into the modal window
 			$(document).on('click', '.js-open', function()
 			{
 				m.open( document.getElementById( this.getAttribute('rel') ).innerHTML );

@@ -1,5 +1,5 @@
 # jQuery Modal
-[jQuery Modal][1] is a performant and flexible [jQuery][2] modal window plugin. The plugin is designed to allow multiple instances and nesting.
+[jQuery Modal][1] is a performant and flexible [jQuery][2] modal window plugin. The plugin is optimised and customisable and even supports multiple, nestable instances.
 
 ## Dependencies
 
