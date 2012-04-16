@@ -2,7 +2,7 @@
  * @name        Simple modal
  * @author      Matt Hinchliffe
  * @modified    16/04/2012
- * @version     0.7.1
+ * @version     0.7.2
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
  *
@@ -113,7 +113,7 @@
 			    width     = this.wrapper.width(),
 			    maxHeight = this.context.height(),
 			    maxWidth  = this.context.width(),
-			    top       = this.context.scrollTop();
+			    top       = this.opts.fixed ? 0 : this.context.scrollTop();
 
 			this.wrapper.css(
 			{
