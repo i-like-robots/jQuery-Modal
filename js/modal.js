@@ -1,8 +1,8 @@
 /**
  * @name        Simple modal
  * @author      Matt Hinchliffe
- * @modified    15/04/2012
- * @version     0.7.0
+ * @modified    16/04/2012
+ * @version     0.7.1
  * @requires    jQuery 1.7+
  * @description A simple modal overlay
  *
@@ -33,14 +33,16 @@
 	function Modal(target, options)
 	{
 		this.opts = $.extend({}, {
-			onopen:  undefined,
-			onclose: undefined,
-			onupdate: undefined,
-			width: 640,
-			height: 480,
-			fixed: false,
-			overlay: true,
-			blur: true
+			onopen:    undefined,
+			onclose:   undefined,
+			onupdate:  undefined,
+			width:     640,
+			maxWidth:  '95%',
+			height:    480,
+			maxHeight: '95%',
+			fixed:     false,
+			overlay:   true,
+			blur:      true
 		}, options);
 		this.target = target;
 
@@ -71,7 +73,10 @@
 			this.wrapper = $('<div class="modal-wrapper"><span class="modal-close" data-toggle="modal">Close</span></div>').css({
 				position: this.opts.fixed ? 'fixed' : 'absolute',
 				width: this.opts.width,
-				height: this.opts.height
+				maxWidth: this.opts.maxWidth,
+				height: this.opts.height,
+				maxHeight: this.opts.maxHeight,
+				display: 'none'
 			});
 			this.content = $('<div class="modal-content" />').appendTo( this.wrapper );
 			this.wrapper.appendTo( this.target );
@@ -84,7 +89,8 @@
 						position: 'absolute',
 						top: 0,
 						left: 0,
-						width: '100%'
+						width: '100%',
+						display: 'none'
 					})
 					.appendTo( this.target );
 			}
@@ -155,18 +161,19 @@
 				self.close();
 			});
 
-			// Add content to window
-			this.content.html(content);
-
 			// Fade in
 			this.wrapper
 				.add( this.overlay )
 				.stop()
 				.fadeIn();
 
-			// Move into position
-			this.align();
 			this.isOpen = true;
+
+			// Add content to window
+			if (content)
+			{
+				this.update(content);
+			}
 
 			// Callbacks
 			if (this.opts.onopen)
@@ -193,16 +200,16 @@
 			if (this.isOpen)
 			{
 				this.align();
+			}
 
-				// Callbacks
-				if (this.opts.onupdate)
-				{
-					this.opts.onupdate.call(this);
-				}
-				if (callback)
-				{
-					callback.call(this);
-				}
+			// Callbacks
+			if (this.opts.onupdate)
+			{
+				this.opts.onupdate.call(this);
+			}
+			if (callback)
+			{
+				callback.call(this);
 			}
 		},
 

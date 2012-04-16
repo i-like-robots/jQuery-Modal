@@ -19,17 +19,123 @@
 </head>
 <body>
 
-	<div id="introduction">
-		<h1>jQuery Modal</h1>
-		<p class="intro">
-			Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
-			window</a>. The plugin is optimised and customisable with a neat feature: it supports multiple, nestable
-			instances.
-		</p>
-		<h2>Example</h2>
-		<p>
-			<button class="js-open" rel="example">Open the modal</button>
-		</p>
+	<div id="container">
+
+		<section class="introduction">
+			<h1>jQuery Modal</h1>
+			<p>
+				Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
+				window</a>. The plugin is optimised and customisable and even supports multiple, nestable instances.
+			</p>
+		</section>
+
+		<hr />
+
+		<section class="examples">
+			<h2>Example</h2>
+			<p>
+				<button class="js-open" rel="example">Open the modal</button>
+			</p>
+			<pre><code><span class="comment">// Create an instance</span>
+var m = $('body').modal(opts).data('modal');
+
+<span class="comment">// Do whatever</span>
+$.ajax({
+    success: function(data)
+    {
+        m.open(data, callback);
+    }
+});</code></pre>
+		</section>
+
+		<hr />
+
+		<section class="options">
+			<h3>Options</h3>
+			<dl>
+				<dt>onopen</dt>
+				<dd>
+					Callback function to execute after modal window has opened. Default: <code>undefined</code>.
+				</dd>
+				<dt>onclose</dt>
+				<dd>
+					Callback function to execute after modal window has closed. Default: <code>undefined</code>.
+				</dd>
+				<dt>onupdate</dt>
+				<dd>
+					Callback function to execute when modal window content is changed. Default: <code>undefined</code>.
+				</dd>
+				<dt>width</dt>
+				<dd>
+					Predefined width for modal window. Set to <code>auto</code> for the contents automatic flow width.
+					Default: <code>640</code>.
+				</dd>
+				<dt>maxWidth</dt>
+				<dd>
+					Set CSS <code>max-width</code> relative to the modal windows parent. Set to <code>none</code> to
+					set no maximum width. Default: <code>95%'</code>.
+				</dd>
+				<dt>height</dt>
+				<dd>
+					Predefined height for modal window. Set to <code>auto</code> for the contents automatic flow height.
+					Default: <code>480</code>.
+				</dd>
+				<dt>maxHeight</dt>
+				<dd>
+					Set CSS <code>max-height</code> relative to the modal windows parent. Set to <code>none</code> to
+					set no maximum height. Default: <code>95%'</code>.
+				</dd>
+				<dt>fixed</dt>
+				<dd>
+					Use CSS <code>fixed</code> positioning for the modal window instead of <code>absolute</code>.
+					Default: <code>false</code>.
+				</dd>
+				<dt>overlay</dt>
+				<dd>
+					Create an overlay beneath the modal window and over the target. Default: <code>true</code>.
+				</dd>
+				<dt>blur</dt>
+				<dd>
+					Close the modal window when overlay is clicked. Default: <code>true</code>.
+				</dd>
+			</dl>
+		</section>
+
+		<hr />
+
+		<section class="api">
+			<h4>Public methods</h4>
+			<dl>
+				<dt>.open([content][, callback])</dt>
+				<dd>
+					Opens the modal window. <var>Content</var> Passed to the <code>.update()</code> method.
+					<var>Callback</var> A function to call once the window has opened.
+				</dd>
+				<dt>.close([callback])</dt>
+				<dd>
+					Closes the modal window. <var>Callback</var> A function to call once the window has
+					closed.
+				</dd>
+				<dt>.update(content[, callback])</dt>
+				<dd>
+					Updates the contents of the modal window. <var>Content</var> Set the content of the modal window
+					via jQuery's <a href="http://api.jquery.com/html/#html2">.html()</a> method. <var>Callback</var> A
+					function to call once the window has been updated. The <code>.align()</code> method will be called
+					if the window is open.
+				</dd>
+				<dt>.align()</dt>
+				<dd>
+					Repositions the window to the current viewport.
+				</dd>
+				<dt>Callbacks:</dt>
+				<dd>
+					All callbacks will be called from the scope of the modal instance, so that <code>this</code> will
+					refer to the modal instance. Callbacks provided as arguments to the public methods will be executed
+					in addition to those specified in the options.
+				</dd>
+			</dl>
+		</section>
+
 	</div>
 
 	<p id="example">
@@ -44,13 +150,13 @@
 	<script>
 		$(function()
 		{
-			// Create a modal instance
-			window.modal = $('body').modal().data('modal');
+			// Create a modal instance. Use the document body as target to create a modal window for the entire document.
+			window.m = $('body').modal().data('modal');
 
 			// Bind click event
 			$(document).on('click', '.js-open', function()
 			{
-				modal.open( document.getElementById( this.getAttribute('rel') ).innerHTML );
+				m.open( document.getElementById( this.getAttribute('rel') ).innerHTML );
 			});
 		});
 	</script>

@@ -1,9 +1,10 @@
 /**
  * Author:      Matt Hinchliffe <www.maketea.co.uk>
- * Modified:    13/04/2012
+ * Modified:    16/04/2012
  * Description: Some crummy styles to lay out the example file
  */
 
+/* Elements */
 html, body {
 	height:100%;
 	margin:0;
@@ -16,13 +17,32 @@ html, body {
 		background:#eee;
 	}
 
-h1 {
-	font-size:2em;
-	margin:0 0 .5em;
+h1, h2, h3, h4 {
+	font-weight:normal;
+	text-align:center;
+	color:#555;
+}
+	h1 {
+		font-size:2em;
+		margin:0 0 .5em;
+
+	}
+	h2, h3, h4 {
+		font-size:1.5em;
+		margin:0 0 1em;
+	}
+
+p, dd {
+	margin:0 0 1.5em;
 }
 
-p {
-	margin:0 0 1.5em;
+dt {
+	font-weight:bold;
+}
+
+dd {
+	font-size:0.8125em;
+	color:#555;
 }
 
 button {
@@ -39,12 +59,44 @@ button {
 		background-color:#111;
 	}
 
-#introduction {
-	width:25em;
-	margin:0 auto;
-	padding:5em 0 2em;
-	text-align:center;
+pre, code, var {
+	font:normal 1em/1 Consolas, "Lucida Console", Monaco, monospace;
 }
+	pre {
+		overflow:auto;
+		padding:1em .5em;
+		border:1px solid #e4e4ee;
+		text-align:left;
+		background:#f4f4f4;
+		border-radius:5px;
+	}
+		.comment {
+			color:#999;
+		}
+	var {
+		text-decoration:underline;
+	}
+
+hr {
+	height:1px;
+	padding:0;
+	margin:0 0 1.5em;
+	border:0;
+	background:#ccc;
+}
+
+#container {
+	width:28em;
+	margin:0 auto;
+	padding:3em 1em 2em;
+	background:#fff;
+	-webkit-box-shadow:0 0 5em rgba(0, 0, 0, 0.1);
+	   -moz-box-shadow:0 0 5em rgba(0, 0, 0, 0.1);
+	        box-shadow:0 0 5em rgba(0, 0, 0, 0.1);
+}
+	.examples {
+		text-align:center;
+	}
 
 #example {
 	display:none;
