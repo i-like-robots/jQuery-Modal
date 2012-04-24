@@ -1,12 +1,14 @@
+/*!
+ * @name        jQuery Modal
+ * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
+ * @modified    24/04/2012
+ * @version     0.8.0
+ */
+
 /**
- * @name        Simple modal
- * @author      Matt Hinchliffe
- * @modified    16/04/2012
- * @version     0.7.2
- * @requires    jQuery 1.7+
  * @description A simple modal overlay
  *
- * jQuery plugin setup:
+ * @example jQuery plugin setup
  * var modal_instance = $('body').modal().data('modal');
  *
  * $.ajax({
@@ -17,7 +19,7 @@
  *     }
  * });
  *
- * Generated markup:
+ * @example Generated markup
  * <div class="modal-wrapper">
  *     <div class="modal-content" />
  *     <span class="modal-close" data-toggle="modal">Close</span>
@@ -32,7 +34,7 @@
 
 	function Modal(target, options)
 	{
-		this.opts = $.extend({}, {
+		this.opts = $.extend({}, { // Create a new options object for each instance
 			onopen:    undefined,
 			onclose:   undefined,
 			onupdate:  undefined,
@@ -42,8 +44,10 @@
 			maxHeight: '95%',
 			fixed:     false,
 			overlay:   true,
-			blur:      true
+			blur:      true,
+			escape:    true
 		}, options);
+
 		this.target = target;
 
 		return this;
@@ -149,10 +153,18 @@
 
 			if (this.isBody)
 			{
-				this.context.on('resize.modal', function()
-				{
-					self.align();
-				});
+				this.context
+					.on('resize.modal', function()
+					{
+						self.align();
+					})
+					.on('keyup.modal', function(e)
+					{
+						if ( e.keyCode === 27 )
+						{
+							self.close();
+						}
+					});
 			}
 
 			this.context.on('click.modal', '[data-toggle="modal"]', function(e)
@@ -259,7 +271,10 @@
 	{
 		return this.each(function()
 		{
-			$.data(this, 'modal', new Modal(this, options) );
+			if ( ! $.data(this, 'modal') )
+			{
+				$.data(this, 'modal', new Modal(this, options) );
+			}
 		});
 	};
 
