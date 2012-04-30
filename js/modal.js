@@ -1,11 +1,8 @@
-/*!
+/**
  * @name        jQuery Modal
  * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
  * @modified    24/04/2012
- * @version     0.8.0
- */
-
-/**
+ * @version     0.8.1
  * @description A simple modal overlay
  *
  * @example jQuery plugin setup
@@ -153,21 +150,21 @@
 
 			if (this.isBody)
 			{
-				this.context
-					.on('resize.modal', function()
+				this.context.on('resize.modal', function()
+				{
+					self.align();
+				});
+
+				this.doc.on('keyup.modal', function(e)
+				{
+					if ( e.keyCode === 27 )
 					{
-						self.align();
-					})
-					.on('keyup.modal', function(e)
-					{
-						if ( e.keyCode === 27 )
-						{
-							self.close();
-						}
-					});
+						self.close();
+					}
+				});
 			}
 
-			this.context.on('click.modal', '[data-toggle="modal"]', function(e)
+			this.doc.on('click.modal', '[data-toggle="modal"]', function(e)
 			{
 				e.preventDefault();
 				self.close();
@@ -241,7 +238,7 @@
 			var self = this;
 
 			// Unbind events
-			this.context.off('.modal');
+			this.doc.off('.modal');
 
 			// Fade out
 			this.wrapper
