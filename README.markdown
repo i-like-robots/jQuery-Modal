@@ -1,5 +1,5 @@
 # jQuery Modal
-[jQuery Modal][1] is a performant and flexible [jQuery][2] modal window plugin. The plugin is optimised and customisable and even supports multiple, nestable instances. Less than 3KB minified and 1KB with gzip compression.
+Every front-end developer needs their own [modal window][1]. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and 1KB with gzip compression.
 
 ## Dependencies
 
@@ -21,7 +21,7 @@ https://github.com/i-like-robots/jQuery-Modal/issues
 
 ## Versioning
 
-The current version is `0.8.1`. Releases will be numbered in following format:
+The current version is `0.9.0`. Releases will be numbered in following format:
 
 `<major>.<minor>.<patch>`
 

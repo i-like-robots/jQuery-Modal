@@ -1,8 +1,8 @@
 /**
  * @name        jQuery Modal
  * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
- * @modified    24/04/2012
- * @version     0.8.1
+ * @modified    06/08/2012
+ * @version     0.9.0
  * @description A simple modal overlay
  *
  * @example jQuery plugin setup
@@ -58,7 +58,6 @@
 
 		/**
 		 * Instantiate
-		 *
 		 * @description Create the structure on first run
 		 */
 		_init: function()
@@ -105,7 +104,6 @@
 
 		/**
 		 * Align
-		 *
 		 * @description Centre modal window and size overlay to fit
 		 */
 		align: function()
@@ -130,7 +128,6 @@
 
 		/**
 		 * Open
-		 *
 		 * @description Open the modal window
 		 * @param {object} content
 		 * @param {function} callback
@@ -197,7 +194,6 @@
 
 		/**
 		 * Update
-		 *
 		 * @description Change the modal window contents
 		 * @param {object} content
 		 * @param {function} callback
@@ -223,8 +219,21 @@
 		},
 
 		/**
+		 * Resize
+		 * @description Resizes the modal window content area
+		 */
+		resize: function(width, height)
+		{
+			this.wrapper.css({
+				width: width,
+				height: height
+			});
+
+			this.align();
+		},
+
+		/**
 		 * Close
-		 *
 		 * @description Close the modal window and clear contents
 		 * @param {function} callback
 		 */

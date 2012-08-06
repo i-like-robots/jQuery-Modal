@@ -9,6 +9,7 @@
 
 
 	<link rel="stylesheet" href="css/example.css" />
+	<link rel="stylesheet" href="css/pygments.css" />
 	<link rel="stylesheet" href="css/modal.css" />
 
 	<!--
@@ -21,38 +22,91 @@
 
 	<div id="container">
 
-		<section class="introduction">
+		<section id="introduction">
 			<h1>jQuery Modal</h1>
 			<p>
 				Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
-				window</a>. The plugin is optimised and customisable and even supports multiple, nestable instances.
-				Less than 3KB minified and 1KB with gzip compression.
+				window</a>. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and
+				1KB with gzip compression.
 			</p>
+
+			<div id="example">
+				<p>
+					<button class="js-open">See an example</button>
+				</p>
+				<p id="example-content" style="display:none;">
+					Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
+					capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
+					ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
+					prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
+				</p>
+			</div>
 		</section>
 
 		<hr />
 
-		<section class="examples">
-			<h2>Example</h2>
+		<section id="setup">
+			<h2>Setup</h2>
 			<p>
-				<button class="js-open" rel="example">Open the modal</button>
+				This isn't a copy and paste plugin, it's just an outline. The plugin is instantiated in the usual
+				manner and an instances API can be accessed via element data.
 			</p>
-			<pre><code><span class="comment">// Create an instance</span>
-var m = $('body').modal(opts).data('modal');
 
-<span class="comment">// Do whatever</span>
-$.ajax({
-    success: function(data)
-    {
-        m.open(data);
-    }
-});</code></pre>
+			<figure>
+<pre class="syntax"><span class="c1">// Create a modal instance.</span>
+<span class="kd">var</span> <span class="nx">$m</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">).</span><span class="nx">modal</span><span class="p">(),</span>
+
+    <span class="c1">// Access an instance API</span>
+    <span class="nx">api</span> <span class="o">=</span> <span class="nx">$m</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">'modal'</span><span class="p">);</span>
+</pre>
+			</figure>
+
+			<p>
+				The simplest example is to open a modal window instance with basic HTML content:
+			</p>
+
+			<figure>
+<pre class="syntax"><span class="c1">// Open the modal with some content</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s2">"&lt;p&gt;Hello, is it me you're looking for?"</span><span class="p">);</span>
+</pre>
+			</figure>
+
+			<p>
+				The API is flexible enough to do any common task such as confirmation boxes, displaying images and
+				external content.
+			</p>
+
+			<figure>
+<pre class="syntax"><span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+	<span class="nx">url</span><span class="o">:</span> <span class="s1">'http://localhost/api?foo=bar'</span><span class="p">,</span>
+	<span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="k">if</span> <span class="p">(</span><span class="nx">api</span><span class="p">.</span><span class="nx">isOpen</span><span class="p">)</span>
+		<span class="p">{</span>
+			<span class="nx">api</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+		<span class="p">}</span>
+		<span class="k">else</span>
+		<span class="p">{</span>
+			<span class="nx">api</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+		<span class="p">}</span>
+	<span class="p">},</span>
+	<span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">xhr</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span>
+	<span class="p">{</span>
+		<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+	<span class="p">}</span>
+<span class="p">});</span>
+</pre>
+			</figure>
+
 		</section>
 
 		<hr />
 
-		<section class="options">
-			<h3>Options</h3>
+		<section id="options">
+			<h2>Options</h2>
+			<p>
+				Global options can be specified via the standard jQuery plugin interface.
+			</p>
 			<dl>
 				<dt>onopen</dt>
 				<dd>
@@ -74,7 +128,7 @@ $.ajax({
 				<dt>maxWidth</dt>
 				<dd>
 					Set CSS <code>max-width</code> relative to the modal windows parent. Set to <code>none</code> to
-					set no maximum width. Default: <code>95%'</code>.
+					set no maximum width. Default: <code>'95%'</code>.
 				</dd>
 				<dt>height</dt>
 				<dd>
@@ -84,7 +138,7 @@ $.ajax({
 				<dt>maxHeight</dt>
 				<dd>
 					Set CSS <code>max-height</code> relative to the modal windows parent. Set to <code>none</code> to
-					set no maximum height. Default: <code>95%'</code>.
+					set no maximum height. Default: <code>'95%'</code>.
 				</dd>
 				<dt>fixed</dt>
 				<dd>
@@ -108,8 +162,8 @@ $.ajax({
 
 		<hr />
 
-		<section class="api">
-			<h4>Public methods</h4>
+		<section id="api">
+			<h2>Public methods</h2>
 			<dl>
 				<dt>.open([content][, callback])</dt>
 				<dd>
@@ -132,41 +186,44 @@ $.ajax({
 				<dd>
 					Repositions the window to the center of the modal window parent.
 				</dd>
+				<dt>.resize(width, height)</dt>
+				<dd>
+					Resizes the modal window content area. <var>Width</var> and <var>Height</var> can be any unit
+					compatible with the <a href="http://api.jquery.com/category/dimensions/">jQuery Dimensions</a> API.
+				</dd>
 				<dt>A note on callbacks:</dt>
 				<dd>
 					All callbacks will be called from the scope of the modal instance, so that <code>this</code> will
-					refer to the modal instance. Callbacks provided as arguments to the public methods will be executed
-					in addition to those specified as options.
+					refer to the modal instance. Callbacks provided as arguments to the public methods above will be
+					executed in addition to those specified as instance options.
 				</dd>
 			</dl>
 		</section>
 
 	</div>
 
-	<p id="example">
-		Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
-		capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
-		ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
-		prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
-	</p>
-
-	<a href="https://github.com/i-like-robots/jQuery-Modal">
-		<img style="position:absolute;top:0;right:0;border:0;" src="https://a248.e.akamai.net/assets.github.com/img/30f550e0d38ceb6ef5b81500c64d970b7fb0f028/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" />
+	<a href="http://github.com/i-like-robots/jQuery-Modal">
+		<img style="position:absolute; top:0; right:0; border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
 	</a>
 
-	<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.2.min.js"></script>
+	<script src="//code.jquery.com/jquery-1.7.2.min.js"></script>
 	<script src="js/modal.js"></script>
 	<script>
 		$(function()
 		{
-			// Create a modal instance. Use the document body as target to create a modal window for the entire document.
-			window.m = $('body').modal().data('modal');
+			// Create a modal instance.
+			var $m = $('body').modal(),
+
+			    // Access an instance API
+			    api = $m.data('modal');
 
 			// Bind a click event to copy a hidden elements content into the modal window
 			$(document).on('click', '.js-open', function()
 			{
-				m.open( document.getElementById( this.getAttribute('rel') ).innerHTML );
+				api.open( document.getElementById('example-content').innerHTML );
 			});
+
+			window.$m = $m;
 		});
 	</script>
 
