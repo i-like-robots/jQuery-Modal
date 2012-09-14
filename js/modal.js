@@ -1,8 +1,8 @@
 /**
  * @name        jQuery Modal
  * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
- * @modified    06/08/2012
- * @version     0.9.0
+ * @modified    13/09/2012
+ * @version     1.0.0b
  * @description A simple modal overlay
  *
  * @example jQuery plugin setup
@@ -18,13 +18,11 @@
  *
  * @example Generated markup
  * <div class="modal-wrapper">
- *     <div class="modal-content" />
  *     <span class="modal-close" data-toggle="modal">Close</span>
+ *     <div class="modal-content" />
  * </div>
  * <div class="modal-overlay" data-toggle="modal" />
  */
-
-/*jshint trailing:true, smarttabs:true */
 ; (function($, undefined)
 {
 	"use strict";
@@ -32,17 +30,17 @@
 	function Modal(target, options)
 	{
 		this.opts = $.extend({}, { // Create a new options object for each instance
-			onopen:    undefined,
-			onclose:   undefined,
-			onupdate:  undefined,
-			width:     640,
-			maxWidth:  '95%',
-			height:    480,
-			maxHeight: '95%',
-			fixed:     false,
-			overlay:   true,
-			blur:      true,
-			escape:    true
+			onopen: undefined,
+			onhide: undefined,
+			onupdate: undefined,
+			fixed: false,
+			overlay: true,
+			blur: true,
+			escape: true,
+			width: 640,
+			maxWidth: '95%',
+			height: 480,
+			maxHeight: '95%'
 		}, options);
 
 		this.target = target;
@@ -62,15 +60,9 @@
 		 */
 		_init: function()
 		{
-			if (this.isInitialized)
-			{
-				return;
-			}
-
 			this.doc = $(document);
 
-			// Build modal
-			this.wrapper = $('<div class="modal-wrapper"><span class="modal-close" data-toggle="modal">Close</span></div>').css({
+			this.wrapper = $('<div class="modal-wrapper" />').css({
 				position: this.opts.fixed ? 'fixed' : 'absolute',
 				width: this.opts.width,
 				maxWidth: this.opts.maxWidth,
@@ -78,10 +70,14 @@
 				maxHeight: this.opts.maxHeight,
 				display: 'none'
 			});
+			this.close = $('<span class="modal-close" data-toggle="modal">Close</span>').appendTo( this.wrapper );
 			this.content = $('<div class="modal-content" />').appendTo( this.wrapper );
+
 			this.wrapper.appendTo( this.target );
 
-			// Create overlay
+			// Define overlay to prevent errors
+			this.overlay = false;
+
 			if (this.opts.overlay)
 			{
 				this.overlay = $('<div class="modal-overlay"' + (this.opts.blur ? 'data-toggle="modal"' : '') + ' />')
@@ -108,11 +104,11 @@
 		 */
 		align: function()
 		{
-			var height    = this.wrapper.height(),
-			    width     = this.wrapper.width(),
+			var height = this.wrapper.outerHeight(),
+			    width = this.wrapper.outerWidth(),
 			    maxHeight = this.context.height(),
-			    maxWidth  = this.context.width(),
-			    top       = this.opts.fixed ? 0 : this.context.scrollTop();
+			    maxWidth = this.context.width(),
+			    top = this.opts.fixed ? 0 : this.context.scrollTop();
 
 			this.wrapper.css(
 			{
@@ -138,10 +134,6 @@
 			{
 				this._init();
 			}
-			else if (this.isOpen)
-			{
-				return;
-			}
 
 			var self = this;
 
@@ -156,7 +148,7 @@
 				{
 					if ( e.keyCode === 27 )
 					{
-						self.close();
+						self.hide();
 					}
 				});
 			}
@@ -164,7 +156,7 @@
 			this.doc.on('click.modal', '[data-toggle="modal"]', function(e)
 			{
 				e.preventDefault();
-				self.close();
+				self.hide();
 			});
 
 			// Fade in
@@ -181,6 +173,7 @@
 				this.update(content);
 			}
 
+
 			// Callbacks
 			if (this.opts.onopen)
 			{
@@ -194,8 +187,8 @@
 
 		/**
 		 * Update
-		 * @description Change the modal window contents
-		 * @param {object} content
+		 * @description Update the modal window contents
+		 * @param {object|string} content
 		 * @param {function} callback
 		 */
 		update: function(content, callback)
@@ -221,6 +214,8 @@
 		/**
 		 * Resize
 		 * @description Resizes the modal window content area
+		 * @param {numeric|string} width
+		 * @param {numeric|string} height
 		 */
 		resize: function(width, height)
 		{
@@ -233,37 +228,26 @@
 		},
 
 		/**
-		 * Close
-		 * @description Close the modal window and clear contents
+		 * Hide
+		 * @description Hide the modal window
 		 * @param {function} callback
 		 */
-		close: function(callback)
+		hide: function(callback)
 		{
-			if ( ! this.isInitialized || ! this.isOpen)
-			{
-				return;
-			}
-
-			var self = this;
-
 			// Unbind events
 			this.doc.off('.modal');
 
-			// Fade out
 			this.wrapper
 				.add( this.overlay )
 				.stop()
-				.fadeOut(function()
-				{
-					self.content[0].innerHTML = '';
-				});
+				.fadeOut();
 
 			this.isOpen = false;
 
 			// Callbacks
-			if (this.opts.onclose)
+			if (this.opts.onhide)
 			{
-				this.opts.onclose.call(this);
+				this.opts.onhide.call(this);
 			}
 			if (callback)
 			{
