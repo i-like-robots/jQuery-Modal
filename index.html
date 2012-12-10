@@ -165,15 +165,14 @@
 		<section id="api">
 			<h2>Public methods</h2>
 			<dl>
+				<dt>.align()</dt>
+				<dd>
+					Repositions the window to the center of the modal window parent.
+				</dd>
 				<dt>.open([content][, callback])</dt>
 				<dd>
 					Opens the modal window. <var>Content</var> Passed to the <code>.update()</code> method.
 					<var>Callback</var> A function to call once the window has opened.
-				</dd>
-				<dt>.close([callback])</dt>
-				<dd>
-					Closes the modal window and removes the content. <var>Callback</var> A function to call once the
-					window has closed.
 				</dd>
 				<dt>.update(content[, callback])</dt>
 				<dd>
@@ -182,14 +181,15 @@
 					function to call once the window has been updated. The <code>.align()</code> method will be called
 					if the window is open.
 				</dd>
-				<dt>.align()</dt>
-				<dd>
-					Repositions the window to the center of the modal window parent.
-				</dd>
 				<dt>.resize(width, height)</dt>
 				<dd>
 					Resizes the modal window content area. <var>Width</var> and <var>Height</var> can be any unit
 					compatible with the <a href="http://api.jquery.com/category/dimensions/">jQuery Dimensions</a> API.
+				</dd>
+				<dt>.hide([callback])</dt>
+				<dd>
+					Hides the modal window and removes event listeners. <var>Callback</var> A function to call once the
+					window has closed.
 				</dd>
 				<dt>A note on callbacks:</dt>
 				<dd>
@@ -206,7 +206,7 @@
 		<img style="position:absolute; top:0; right:0; border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
 	</a>
 
-	<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="js/modal.js"></script>
 	<script>
 		$(function()
