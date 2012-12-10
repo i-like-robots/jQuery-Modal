@@ -1,7 +1,7 @@
 /*!
  * @name        jQuery Modal
  * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
- * @modified    10/12/2012
+ * @modified    2012-12-10
  * @version     1.0.0
  */
 (function( $, undefined ) {
@@ -21,7 +21,8 @@
             width: 640,
             maxWidth: '95%',
             height: 480,
-            maxHeight: '95%'
+            maxHeight: '95%',
+            namespace: 'modal'
         }, options);
 
         this.target = target;
@@ -49,7 +50,7 @@
             display: 'none'
         });
 
-        this.close = $('<span class="modal-close" data-toggle="modal">Close</span>').appendTo(this.wrapper);
+        this.close = $('<span class="modal-close" data-' + this.opts.namespace + '-close>Close</span>').appendTo(this.wrapper);
         this.content = $('<div class="modal-content">').appendTo(this.wrapper);
 
         this.wrapper.appendTo(this.target);
@@ -58,7 +59,7 @@
         this.overlay = false;
 
         if ( this.opts.overlay ) {
-            this.overlay = $('<div class="modal-overlay"' + (this.opts.blur ? 'data-toggle="modal"' : '') + '>')
+            this.overlay = $('<div class="modal-overlay"' + (this.opts.blur ? 'data-' + this.opts.namespace + '-close' : '') + '>')
                 .css({
                     position: 'absolute',
                     top: 0,
@@ -113,18 +114,18 @@
         var self = this;
 
         if ( this.isBody ) {
-            this.context.on('resize.modal', function() {
+            this.context.on('resize.' + this.opts.namespace, function() {
                 self.align();
             });
 
-            this.doc.on('keyup.modal', function( e ) {
+            this.doc.on('keyup.' + this.opts.namespace, function( e ) {
                 if ( e.keyCode === 27 ) {
                     self.hide();
                 }
             });
         }
 
-        this.doc.on('click.modal', '[data-toggle="modal"]', function( e ) {
+        this.doc.on('click.modal', '[data-' + this.opts.namespace + '-close]', function( e ) {
             e.preventDefault();
             self.hide();
         });
@@ -198,7 +199,7 @@
     Modal.prototype.hide = function( callback ) {
 
         // Unbind events
-        this.doc.off('.modal');
+        this.doc.off('.' + this.opts.namespace);
 
         this.wrapper
             .add(this.overlay)

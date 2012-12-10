@@ -1,5 +1,5 @@
 # jQuery Modal
-Every front-end developer needs their own [modal window][1]. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and 1KB with gzip compression.
+Every front-end developer needs their own [modal window][1]. The plugin is performant, tested, customisable and easy to integrate. Less than 3KB minified and 1KB gzipped.
 
 ## Dependencies
 

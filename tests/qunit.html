@@ -20,35 +20,16 @@
 </head>
 <body>
 
-	<div id="container">
-
-		<section id="introduction">
-			<h1>QUnit tests</h1>
-
-			<p id="example-1" style="display:none;">
-				Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
-				capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
-				ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
-				prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
-			</p>
-
-			<p id="example-2" style="display:none;">
-				Brisket short ribs beef ribs, pork loin rump ribeye shankle meatball tri-tip tail chuck meatloaf filet
-				mignon. Pork chop filet mignon tail, chicken kielbasa salami venison ball tip rump. Tenderloin brisket
-				andouille shank pig, meatloaf filet mignon spare ribs ball tip t-bone sausage. Ribeye tail doner shank,
-				pork belly ham hock spare ribs salami pastrami cow. Meatball leberkas pork frankfurter meatloaf turkey
-				rump drumstick, spare ribs beef ribs.
-			</p>
-
-		</section>
-
-	</div>
+	<p id="example-content" style="display:none;">
+		Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
+		capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
+		ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
+		prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
+	</p>
 
 	<section id="tests" style="margin: 20px;">
-		<h2>Tests</h2>
 		<div id="qunit"></div>
 	</section>
-
 
 	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="../js/modal.js"></script>
@@ -91,24 +72,22 @@
 
 			test(".open()", function() {
 
-				window.testOpen = false;
+				var testOpen = false;
 
-				var content = $('#example-1').html()
-
-				api.open( content, function() {
-					window.testOpen = true;
+				api.open('', function() {
+					testOpen = true;
 				});
 
 				equal(api.isOpen, true, "Check isOpen is correct");
-				equal(api.content.html(), content, "Check modal content was populated");
-				equal(window.testOpen, true, "Check callback was called");
+				equal(api.content.is(':visible'), true, "Check modal is hidden");
+				equal(testOpen, true, "Check callback was called");
 			});
 
 			test(".update()", function() {
 
-				window.testUpdate = false;
+				window.testOpen = false;
 
-				var content = $('#example-2').html();
+				var content = $('#example-content').html();
 
 				api.update(content, function() {
 					window.testUpdate = true;
@@ -125,15 +104,30 @@
 
 			test(".hide()", function() {
 
-				window.testHide = false;
+				var testOpen = true;
 
 				api.hide(function() {
-					window.testHide = true;
+					testOpen = false;
 				});
 
-				equal(api.content.is(':visible'), false, "Check modal is hidden");
 				equal(api.isOpen, false, "Check isOpen is correct");
-				equal(window.testHide, true, "Check callback was called");
+				equal(api.content.is(':visible'), false, "Check modal is hidden");
+				equal(testOpen, false, "Check callback was called");
+			});
+
+			//
+			// user controls
+			//
+
+			module("User controls", lifecycle);
+
+			test("Close button", function() {
+
+				api.open();
+				api.close.trigger('click');
+
+				equal(api.isOpen, false, "Check isOpen is correct");
+				equal(api.content.is(':visible'), false, "Check modal is hidden");
 			});
 
 		});

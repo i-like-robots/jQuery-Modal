@@ -26,8 +26,8 @@
 			<h1>jQuery Modal</h1>
 			<p>
 				Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
-				window</a>. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and
-				1KB with gzip compression.
+				window</a>. jQuery modal is performant, tested, customisable and easy to integrate. Less than 2.5KB
+				minified and 1KB gzipped.
 			</p>
 
 			<div id="example">
@@ -107,18 +107,36 @@
 			<p>
 				Global options can be specified via the standard jQuery plugin interface.
 			</p>
+
 			<dl>
 				<dt>onopen</dt>
 				<dd>
 					Callback function to execute after modal window has opened. Default: <code>undefined</code>.
 				</dd>
-				<dt>onclose</dt>
+				<dt>onhide</dt>
 				<dd>
 					Callback function to execute after modal window has closed. Default: <code>undefined</code>.
 				</dd>
 				<dt>onupdate</dt>
 				<dd>
 					Callback function to execute when modal window content is changed. Default: <code>undefined</code>.
+				</dd>
+				<dt>fixed</dt>
+				<dd>
+					Use CSS <code>fixed</code> positioning for the modal window instead of <code>absolute</code>.
+					Default: <code>false</code>.
+				</dd>
+				<dt>overlay</dt>
+				<dd>
+					Create an overlay beneath the modal window and over the target. Default: <code>true</code>.
+				</dd>
+				<dt>blur</dt>
+				<dd>
+					Close the modal window when overlay is clicked. Default: <code>true</code>.
+				</dd>
+				<dt>escape</dt>
+				<dd>
+					Close the modal window when the escape key is pressed. Default: <code>true</code>.
 				</dd>
 				<dt>width</dt>
 				<dd>
@@ -140,22 +158,9 @@
 					Set CSS <code>max-height</code> relative to the modal windows parent. Set to <code>none</code> to
 					set no maximum height. Default: <code>'95%'</code>.
 				</dd>
-				<dt>fixed</dt>
+				<dt>namespace</dt>
 				<dd>
-					Use CSS <code>fixed</code> positioning for the modal window instead of <code>absolute</code>.
-					Default: <code>false</code>.
-				</dd>
-				<dt>overlay</dt>
-				<dd>
-					Create an overlay beneath the modal window and over the target. Default: <code>true</code>.
-				</dd>
-				<dt>blur</dt>
-				<dd>
-					Close the modal window when overlay is clicked. Default: <code>true</code>.
-				</dd>
-				<dt>escape</dt>
-				<dd>
-					Close the modal window when the escape key is pressed. Default: <code>true</code>.
+					Data attribute and event binding namespace. Default: <code>'modal'</code>.
 				</dd>
 			</dl>
 		</section>
