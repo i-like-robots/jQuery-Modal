@@ -1,5 +1,5 @@
 # jQuery Modal
-Every front-end developer needs their own [modal window][1]. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and 1KB with gzip compression.
+Every front-end developer needs their own [modal window][1]. The plugin is performant, tested, customisable and easy to integrate. Less than 3KB minified and 1KB gzipped.
 
 ## Dependencies
 
@@ -8,10 +8,10 @@ jQuery 1.7+
 ## Supported browsers*
 
  * Firefox 3.6 and 4-9
- * Chrome 8-18
+ * Chrome
  * Safari 5.1
  * Internet Explorer 7-9
- * Opera 11.5
+ * Opera 11.5+
 
 ## Issues
 
@@ -21,7 +21,7 @@ https://github.com/i-like-robots/jQuery-Modal/issues
 
 ## Versioning
 
-The current version is `0.9.0`. Releases will be numbered in following format:
+The current version is `1.0.0`. Releases will be numbered in following format:
 
 `<major>.<minor>.<patch>`
 

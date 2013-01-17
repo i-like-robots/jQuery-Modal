@@ -26,8 +26,8 @@
 			<h1>jQuery Modal</h1>
 			<p>
 				Every front-end developer needs their own <a href="http://github.com/i-like-robots/jQuery-Modal">modal
-				window</a>. The plugin is performant, customisable and easy to integrate. Less than 3KB minified and
-				1KB with gzip compression. <a href="https://github.com/i-like-robots/jQuery-Modal/zipball/master">Download</a>.
+				window</a>. jQuery modal is performant, tested, customisable and easy to integrate. Less than 2.5KB
+				minified and 1KB gzipped.
 			</p>
 
 			<div id="example">
@@ -107,18 +107,36 @@
 			<p>
 				Global options can be specified via the standard jQuery plugin interface.
 			</p>
+
 			<dl>
 				<dt>onopen</dt>
 				<dd>
 					Callback function to execute after modal window has opened. Default: <code>undefined</code>.
 				</dd>
-				<dt>onclose</dt>
+				<dt>onhide</dt>
 				<dd>
 					Callback function to execute after modal window has closed. Default: <code>undefined</code>.
 				</dd>
 				<dt>onupdate</dt>
 				<dd>
 					Callback function to execute when modal window content is changed. Default: <code>undefined</code>.
+				</dd>
+				<dt>fixed</dt>
+				<dd>
+					Use CSS <code>fixed</code> positioning for the modal window instead of <code>absolute</code>.
+					Default: <code>false</code>.
+				</dd>
+				<dt>overlay</dt>
+				<dd>
+					Create an overlay beneath the modal window and over the target. Default: <code>true</code>.
+				</dd>
+				<dt>blur</dt>
+				<dd>
+					Close the modal window when overlay is clicked. Default: <code>true</code>.
+				</dd>
+				<dt>escape</dt>
+				<dd>
+					Close the modal window when the escape key is pressed. Default: <code>true</code>.
 				</dd>
 				<dt>width</dt>
 				<dd>
@@ -140,22 +158,9 @@
 					Set CSS <code>max-height</code> relative to the modal windows parent. Set to <code>none</code> to
 					set no maximum height. Default: <code>'95%'</code>.
 				</dd>
-				<dt>fixed</dt>
+				<dt>namespace</dt>
 				<dd>
-					Use CSS <code>fixed</code> positioning for the modal window instead of <code>absolute</code>.
-					Default: <code>false</code>.
-				</dd>
-				<dt>overlay</dt>
-				<dd>
-					Create an overlay beneath the modal window and over the target. Default: <code>true</code>.
-				</dd>
-				<dt>blur</dt>
-				<dd>
-					Close the modal window when overlay is clicked. Default: <code>true</code>.
-				</dd>
-				<dt>escape</dt>
-				<dd>
-					Close the modal window when the escape key is pressed. Default: <code>true</code>.
+					Data attribute and event binding namespace. Default: <code>'modal'</code>.
 				</dd>
 			</dl>
 		</section>
@@ -165,15 +170,14 @@
 		<section id="api">
 			<h2>Public methods</h2>
 			<dl>
+				<dt>.align()</dt>
+				<dd>
+					Repositions the window to the center of the modal window parent.
+				</dd>
 				<dt>.open([content][, callback])</dt>
 				<dd>
 					Opens the modal window. <var>Content</var> Passed to the <code>.update()</code> method.
 					<var>Callback</var> A function to call once the window has opened.
-				</dd>
-				<dt>.close([callback])</dt>
-				<dd>
-					Closes the modal window and removes the content. <var>Callback</var> A function to call once the
-					window has closed.
 				</dd>
 				<dt>.update(content[, callback])</dt>
 				<dd>
@@ -182,14 +186,15 @@
 					function to call once the window has been updated. The <code>.align()</code> method will be called
 					if the window is open.
 				</dd>
-				<dt>.align()</dt>
-				<dd>
-					Repositions the window to the center of the modal window parent.
-				</dd>
 				<dt>.resize(width, height)</dt>
 				<dd>
 					Resizes the modal window content area. <var>Width</var> and <var>Height</var> can be any unit
 					compatible with the <a href="http://api.jquery.com/category/dimensions/">jQuery Dimensions</a> API.
+				</dd>
+				<dt>.hide([callback])</dt>
+				<dd>
+					Hides the modal window and removes event listeners. <var>Callback</var> A function to call once the
+					window has closed.
 				</dd>
 				<dt>A note on callbacks:</dt>
 				<dd>
@@ -206,7 +211,7 @@
 		<img style="position:absolute; top:0; right:0; border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
 	</a>
 
-	<script src="//code.jquery.com/jquery-1.7.2.min.js"></script>
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 	<script src="js/modal.js"></script>
 	<script>
 		$(function()

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge;chrome=1" />
+
+	<title>QUnit tests // jQuery Slideshow</title>
+
+
+	<link rel="stylesheet" href="../css/example.css" />
+	<link rel="stylesheet" href="../css/modal.css" />
+	<link rel="stylesheet" href="qunit-1.10.0.css" />
+
+	<!--
+	jQuery Slideshow by Matt Hinchliffe <http://www.maketea.co.uk>
+	Find out more at GitHub <http://github.com/i-like-robots/jQuery-Slideshow>
+	-->
+
+</head>
+<body>
+
+	<p id="example-content" style="display:none;">
+		Rump sausage ham short loin pork. Pig venison boudin bresaola, frankfurter sirloin filet mignon pork shankle
+		capicola. Leberkas jerky ground round short loin bacon. Capicola strip steak flank meatball pork loin beef
+		ribs turducken, biltong jowl kielbasa rump shank short ribs. Beef beef ribs filet mignon frankfurter,
+		prosciutto pork chop chicken ground round short ribs tenderloin sirloin fatback brisket.
+	</p>
+
+	<section id="tests" style="margin: 20px;">
+		<div id="qunit"></div>
+	</section>
+
+	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+	<script src="../js/modal.js"></script>
+	<script src="qunit-1.10.0.js"></script>
+
+	<script>
+		$(function()
+		{
+			var $b, api;
+
+			$.fx.off = true;
+			QUnit.config.reorder = false;
+
+			var lifecycle = {
+				setup: function() {
+					if ( ! api ) {
+						$b = $('body').modal();
+						api = $b.data('modal');
+					}
+				}
+			};
+
+			module("Setup", lifecycle);
+
+			test("API", function() {
+				equal((typeof api).toLowerCase() === "object" && ! $.isEmptyObject(api), true, "API returned");
+			});
+
+			test("$(collection).modal()", function() {
+				equal(api.target, document.body, "Check modal target defined");
+				equal(api.isOpen, false, "Check isOpen is defined");
+				equal(api.isInitialized, false, "Check isInitialized is defined");
+			});
+
+			//
+			// API tests
+			//
+
+			module("Public API", lifecycle);
+
+			test(".open()", function() {
+
+				var testOpen = false;
+
+				api.open('', function() {
+					testOpen = true;
+				});
+
+				equal(api.isOpen, true, "Check isOpen is correct");
+				equal(api.content.is(':visible'), true, "Check modal is hidden");
+				equal(testOpen, true, "Check callback was called");
+			});
+
+			test(".update()", function() {
+
+				window.testOpen = false;
+
+				var content = $('#example-content').html();
+
+				api.update(content, function() {
+					window.testUpdate = true;
+				});
+
+				equal(api.content.html(), content, "Check modal content was re-populated");
+				equal(window.testUpdate, true, "Check callback was called");
+			});
+
+			test(".resize()", function() {
+				api.resize(200, 200);
+				equal(api.wrapper.width(), 200, "New width is set");
+			});
+
+			test(".hide()", function() {
+
+				var testOpen = true;
+
+				api.hide(function() {
+					testOpen = false;
+				});
+
+				equal(api.isOpen, false, "Check isOpen is correct");
+				equal(api.content.is(':visible'), false, "Check modal is hidden");
+				equal(testOpen, false, "Check callback was called");
+			});
+
+			//
+			// user controls
+			//
+
+			module("User controls", lifecycle);
+
+			test("Close button", function() {
+
+				api.open();
+				api.close.trigger('click');
+
+				equal(api.isOpen, false, "Check isOpen is correct");
+				equal(api.content.is(':visible'), false, "Check modal is hidden");
+			});
+
+		});
+	</script>
+
+</body>
+</html>
