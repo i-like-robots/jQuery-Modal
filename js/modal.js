@@ -2,7 +2,7 @@
  * @name        jQuery Modal
  * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
  * @modified    2012-12-10
- * @version     1.0.0
+ * @version     1.0.1
  */
 (function( $, undefined ) {
 

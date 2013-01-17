@@ -1,6 +1,6 @@
 {
-  "name": "jQuery-Modal",
-  "version": "1.0.0",
+  "name": "modal",
+  "version": "1.0.1",
   "title": "jQuery Modal",
   "description": "Every front-end developer needs their own modal window. The plugin is optimised and customisable and even supports multiple, nestable instances.",
   "keywords": [
