@@ -1,9 +1,3 @@
-/*!
- * @name        jQuery Modal
- * @author      Matt Hinchliffe <https://github.com/i-like-robots/jQuery-Modal>
- * @modified    2012-12-10
- * @version     1.0.0
- */
 (function( $, undefined ) {
 
     'use strict';
@@ -218,12 +212,23 @@
     };
 
     // jQuery plugin wrapper
-    $.fn.modal = function( options ) {
+    $.fn.modal = function( options, namespace ) {
         return this.each(function() {
-            if ( ! $.data(this, 'modal') ) {
-                $.data(this, 'modal', new Modal(this, options) );
+            var name = namespace ? 'modal_' + namespace : 'modal';
+            if ( ! $.data(this, name) ) {
+                $.data(this, name, new Modal(this, options) );
             }
         });
     };
+
+    // AMD and CommonJS module compatibility
+    if ( typeof define === 'function' && define.amd ){
+        define(function() {
+            return Modal;
+        });
+    }
+    else if ( typeof module !== 'undefined' && module.exports ) {
+        module.exports = Modal;
+    }
 
 })(jQuery);

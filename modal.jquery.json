@@ -1,0 +1,29 @@
+{
+  "name": "modal",
+  "version": "1.0.2",
+  "title": "jQuery Modal",
+  "description": "Every front-end developer needs their own modal window. The plugin is optimised and customisable and even supports multiple, nestable instances.",
+  "keywords": [
+    "modal",
+    "lightbox",
+    "lightweight",
+    "flexible"
+  ],
+  "author": {
+    "name": "Matt Hinchliffe",
+    "email": "matt+jquery@maketea.co.uk",
+    "url": "http://maketea.co.uk"
+  },
+  "licenses": [
+    {
+      "type": "CC BY-SA 3.0",
+      "url": "http://creativecommons.org/licenses/by-sa/3.0/"
+    }
+  ],
+  "bugs": "https://github.com/i-like-robots/jQuery-Modal/issues",
+  "homepage": "http://i-like-robots.github.io/jQuery-Modal/",
+  "demo": "http://i-like-robots.github.io/jQuery-Modal/",
+  "dependencies": {
+    "jquery": ">=1.7"
+  }
+}

@@ -62,6 +62,22 @@
 			</figure>
 
 			<p>
+				You can also 'namespace' plugin instances so that multiple modals can be attached to the same parent.
+
+			</p>
+
+			<figure>
+<pre class="syntax"><span class="kd">var</span> <span class="nx">$m</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'body'</span><span class="p">);</span>
+
+<span class="c1">// Attach two modal windows to the same parent</span>
+<span class="nx">$m</span><span class="p">.</span><span class="nx">modal</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">'alpha'</span><span class="p">).</span><span class="nx">modal</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="s1">'beta'</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">$m</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">'modal_alpha'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">beta</span> <span class="o">=</span> <span class="nx">$m</span><span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="s1">'modal_beta'</span><span class="p">);</span>
+</pre>
+			</figure>
+
+			<p>
 				The simplest example is to open a modal window instance with basic HTML content:
 			</p>
 
@@ -211,8 +227,8 @@
 		<img style="position:absolute; top:0; right:0; border:0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
 	</a>
 
-	<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-	<script src="js/modal.js"></script>
+	<script src="http://code.jquery.com/jquery-1.10.0.min.js"></script>
+	<script src="src/modal.js"></script>
 	<script>
 		$(function()
 		{
