@@ -23,7 +23,9 @@
   "bugs": "https://github.com/i-like-robots/jQuery-Modal/issues",
   "homepage": "http://i-like-robots.github.io/jQuery-Modal/",
   "demo": "http://i-like-robots.github.io/jQuery-Modal/",
-  "dependencies": {
-    "jquery": ">=1.7"
+  "devDependencies": {
+    "grunt": "0.4.x",
+    "grunt-contrib-jshint": "0.1.x",
+    "grunt-contrib-uglify": "0.2.x"
   }
 }
